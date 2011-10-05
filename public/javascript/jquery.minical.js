@@ -24,6 +24,10 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+----------------------------------------------------------------------
+Updated by hello@warry.fr to add french style of calendar
+----------------------------------------------------------------------
+
 */
 
 (function($) {
@@ -34,12 +38,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       var defaults = {
             start_date: new Date(),
             selected_day: null,
+            start_week_inc: 1, // 1 is monday, 0 is sunday
+            days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"], // First should be Sunday if start_week_inc is 0
+            months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
             offset: {
               x: 0,
               y: 5
             },
             date_format: function(date) {
-              return [date.getMonth()+1, date.getDate(), date.getFullYear()].join("/");
+              return [date.getDate(), date.getMonth()+1, date.getFullYear()].join("/");
             }
           };
 
@@ -133,8 +140,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       return true;
     }
 
-  }
-
   function buildMonth(date) {
     var mc = this,
         year = date.getFullYear(),
@@ -172,8 +177,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         month = date.getMonth(),
         current_month;
     $("<h1 />").text(getMonthName(date) + " " + date.getFullYear()).appendTo($header);
-    $("<a />", { "class": "minical_prev", "href": "#" }).appendTo($header);
-    $("<a />", { "class": "minical_next", "href": "#" }).appendTo($header);
+    $("<a />", { "class": "minical_prev", "href": "#" }).text("◀").appendTo($header);
+    $("<a />", { "class": "minical_next", "href": "#" }).text("▶").appendTo($header);
     for (var w = 0; w < 6; w++) {
       var $tr = $("<tr />");
       for (var d = 0; d < 7; d++) {
@@ -198,11 +203,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   function getStartOfCalendarBlock(date) {
     var firstOfMonth = new Date(date);
     firstOfMonth.setDate(1);
-    return new Date(firstOfMonth.setDate(1 - firstOfMonth.getDay()));
+    return new Date(firstOfMonth.setDate(1 - firstOfMonth.getDay() + mc.opts.start_week_inc));
   }
 
   function getDays() {
-    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var days = mc.opts.days;
     var $tr = $("<tr />");
     for (var i = 0, max = days.length; i < max; i++) {
       $("<th />").text(days[i]).appendTo($tr);
@@ -211,12 +216,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   }
 
   function getMonthName(date) {
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var months = mc.opts.months;
     return months[date.getMonth()];
   }
 
   function getDayClass(day) {
     return "td.minical_day_" + [day.getMonth(), day.getDate(), day.getFullYear()].join("_");
   }
-
+}
 })(jQuery);
+

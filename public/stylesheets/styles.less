@@ -1,0 +1,148 @@
+@font_size: 14px;
+
+@main_background: rgba(255,255,255,.91);
+@main_border: #ccc;
+@main_text: #59646E;
+@box_shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+
+@button_color: #444;
+@button_hover_color: #088cd0;
+
+@days_background: #eee;
+@days_border: #ddd;
+@days_color: #999;
+
+@today_background: #eee;
+@today_color: #000;
+
+@hover_background: #6ec8f6;
+@hover_color: #000;
+@hover_box_shadow: rgba(0,0,0,.2);
+@hover_text_shadow: rgba(0,0,0,.1);
+
+@inactive: #aaa;
+
+@selected_border_color: #517a9c;
+@selected_background: #088cd0;
+@selected_color: #fff;
+@selected_box_shadow: 0 1px 5px rgba(0,0,0,.7) inset, 0 0 5px rgba(10,140,210,1);
+@selected_text_shadow: 1px 1px 0 rgba(0,0,0,.3);
+
+
+ul#minical {
+  position: absolute;
+  color: @main_text;
+  font-size: @font_size;
+  background: @main_background;
+  border: 1px solid @main_border;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+  text-shadow: none;
+  width: 14em;
+  -webkit-box-shadow: @box_shadow;
+  -moz-box-shadow: @box_shadow;
+  box-shadow: @box_shadow;
+  li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    article {
+      float: left;
+      width: 100%;
+      header {
+        color: @main_text;
+        padding: 2px 0;
+        position: relative;
+        margin: 0 -9px;
+        h1 {
+          font-size: 1em;
+          font-weight: bold;
+          text-align: center;
+          padding: .2em 0 .3em;
+          margin: 0;
+        }
+        a {
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 7px;
+          margin: -7px 8px 0;
+          height: 16px;
+          width: 16px;
+          text-decoration: none;
+          color: @button_color;
+          font-size: 12px;
+          &:hover {
+              color: @button_hover_color;
+          }
+          &.minical_next {
+            left: auto;
+            right: 5px;
+          }
+        }
+      }
+      section {
+        margin-bottom: 10px;
+        table {
+          width: 100%;
+          color: inherit;
+          font-size: inherit;
+          border-collapse: collapse;
+          thead {
+            background: @days_background;
+            border-top: 1px solid @days_border;
+            border-bottom: 1px solid @days_border;
+            tr {
+              th {
+                padding: 0.2em 0 0.3em;
+                font-size: 0.7em;
+                text-transform: uppercase;
+                color: @days_color;
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                padding: 1px;
+                text-align: center;
+                font-size: 0.9em;
+                a {
+                  display: block;
+                  color: @main_text;
+                  padding: 0.2em 0.4em;
+                  border-radius: 2px;
+                  text-decoration: none;
+                  -webkit-transition: all 300ms ease-in-out;
+                }
+                &.minical_past_month a,
+                &.minical_future_month a {
+                  color: @inactive;
+                }
+                &.minical_today a {
+                    background: @today_background;
+                    color: @today_color;
+                }
+                a:hover {
+                  background: @hover_background;
+                  color: @hover_color;
+                  box-shadow: 0 1px 5px @hover_box_shadow inset;
+                  text-shadow: 1px 1px 0 @hover_text_shadow;
+                }
+                &.minical_selected a {
+                  border-color: @selected_border_color;
+                  background: @selected_background;
+                  color: @selected_color;
+                  box-shadow: @selected_box_shadow;
+                  text-shadow: @selected_text_shadow;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
