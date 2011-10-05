@@ -6,7 +6,8 @@
 
 ## Requirements
 
-- jQuery, [jquery.minical.js](htts://github.com/camerond/jquery-minical/blob/master/public/javascript/jquery.minical.js), [jquery.minical.sass](https://github.com/camerond/jquery-minical/blob/master/views/stylesheets/jquery.minical.sass) (or the [generated css](http://localhost:9292/stylesheets/jquery.minical.css)), and [jquery_minical_icons.png](https://github.com/camerond/jquery-minical/blob/master/public/images/jquery_minical_icons.png). [See the source on GitHub](https://github.com/camerond/jquery-minical).
+jQuery 1.6+
+Less (for dynamic css)
 
 ## Options
 
@@ -16,6 +17,9 @@
   - `x`
   - `y`
 - `date_format(Date)` output of date object to text input (defaults to m/d/yyyy)
+- `start_week_inc` to choose the first day of week (1 is monday, 0 is sunday)
+- `days` An array with days' names
+- `months` An array with months' names
 
 ## Why I made this instead of using the [jQuery UI Datepicker](http://jqueryui.com/demos/datepicker/):
 
